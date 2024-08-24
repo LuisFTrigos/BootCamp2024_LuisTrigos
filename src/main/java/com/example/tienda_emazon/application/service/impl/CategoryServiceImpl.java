@@ -7,11 +7,13 @@ import com.example.tienda_emazon.application.service.ICategoryService;
 import com.example.tienda_emazon.domain.api.ICategoryServicePort;
 import com.example.tienda_emazon.domain.exception.InvalidDescriptionException;
 import com.example.tienda_emazon.domain.model.CategoryModel;
-import com.example.tienda_emazon.infrastructure.out.respository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +21,6 @@ public class CategoryServiceImpl implements ICategoryService {
 
     private final CategoryDtoMapper categoryDtoMapper;
     private final ICategoryServicePort categoryServicePort;
-    private final CategoryRepository categoryRepository;
 
     public static final String CATEGORY_CREATED_SUCCESFULLY = "Se creó correctamente la categoría";
 
@@ -32,6 +33,11 @@ public class CategoryServiceImpl implements ICategoryService {
         response.setMessage(CATEGORY_CREATED_SUCCESFULLY);
         response.setDate(LocalDateTime.now());
         return response;
+    }
+
+    @Override
+    public List<CategoryModel> getAllCategories() {
+        return categoryServicePort.listCategory();
     }
 }
 

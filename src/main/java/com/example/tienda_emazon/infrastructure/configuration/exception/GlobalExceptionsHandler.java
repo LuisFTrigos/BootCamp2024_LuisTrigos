@@ -1,5 +1,8 @@
-package com.example.tienda_emazon.domain.exception;
+package com.example.tienda_emazon.infrastructure.configuration.exception;
 
+import com.example.tienda_emazon.domain.exception.CategoryAlreadyExistsException;
+import com.example.tienda_emazon.application.dto.response.ErrorResponse;
+import com.example.tienda_emazon.domain.exception.InvalidDescriptionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

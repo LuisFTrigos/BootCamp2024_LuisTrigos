@@ -10,5 +10,4 @@ public interface ICategoryPersistencePort {
     List<CategoryModel> listCategory();
 
     CategoryModel findCategoryByName(String name);
-
 }

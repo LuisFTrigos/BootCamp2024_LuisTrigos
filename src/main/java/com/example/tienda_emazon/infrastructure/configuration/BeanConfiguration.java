@@ -1,8 +1,5 @@
 package com.example.tienda_emazon.infrastructure.configuration;
 
-import com.example.tienda_emazon.application.mapper.CategoryDtoMapper;
-import com.example.tienda_emazon.application.service.ICategoryService;
-import com.example.tienda_emazon.application.service.impl.CategoryServiceImpl;
 import com.example.tienda_emazon.domain.api.ICategoryServicePort;
 import com.example.tienda_emazon.domain.spi.ICategoryPersistencePort;
 import com.example.tienda_emazon.domain.usecase.CategoryUseCase;
@@ -28,12 +25,4 @@ public class BeanConfiguration {
     public ICategoryPersistencePort iCategoryPersistencePort(){
         return new CategoryJpaAdapter(categoryRepository, categoryEntityMapper);
     }
-
-    /*@Bean
-    public ICategoryService iCategoryService(CategoryRepository categoryRepository,
-                                             CategoryDtoMapper categoryDtoMapper,
-                                             ICategoryServicePort iCategoryServicePort){
-        return new CategoryServiceImpl(categoryDtoMapper, iCategoryServicePort, categoryRepository);
-    }*/
-
 }

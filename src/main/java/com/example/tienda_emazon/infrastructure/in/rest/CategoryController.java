@@ -2,8 +2,8 @@ package com.example.tienda_emazon.infrastructure.in.rest;
 
 import com.example.tienda_emazon.application.dto.request.CategoryRequestDto;
 import com.example.tienda_emazon.application.dto.response.GenericResponse;
-import com.example.tienda_emazon.application.handler.ICategoryHandler;
 import com.example.tienda_emazon.application.service.ICategoryService;
+import com.example.tienda_emazon.domain.model.CategoryModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/category")
 public class CategoryController {
-    private final ICategoryHandler categoryHandler;
     private final ICategoryService categoryService;
 
     @PostMapping("/create")
@@ -23,8 +22,11 @@ public class CategoryController {
         GenericResponse genericResponse = categoryService.saveCategory(categoryRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(genericResponse);
     }
+
     @GetMapping
-    public ResponseEntity<List<GenericResponse>> getAllCategoriesList() {
-        return ResponseEntity.ok(categoryHandler.getAllCategoriesList());
+    public ResponseEntity<List<CategoryModel>> getAllCategoriesList() {
+        return ResponseEntity.ok(categoryService.getAllCategories());
     }
+
 }
+

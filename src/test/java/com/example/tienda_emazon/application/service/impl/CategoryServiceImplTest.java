@@ -2,60 +2,62 @@ package com.example.tienda_emazon.application.service.impl;
 
 import com.example.tienda_emazon.application.dto.request.CategoryRequestDto;
 import com.example.tienda_emazon.application.dto.response.GenericResponse;
+import com.example.tienda_emazon.application.mapper.CategoryDtoMapper;
+import com.example.tienda_emazon.domain.api.ICategoryServicePort;
+import com.example.tienda_emazon.domain.exception.InvalidDescriptionException;
 import com.example.tienda_emazon.domain.model.CategoryModel;
-import com.example.tienda_emazon.infrastructure.out.respository.CategoryRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.time.LocalDateTime;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class CategoryServiceImplTest {
 
     @Mock
-    private CategoryRepository categoryRepository;
-
+    private CategoryDtoMapper categoryDtoMapper;
+    @Mock
+    private ICategoryServicePort iCategoryServicePort;
     @InjectMocks
-    private CategoryServiceImpl categoryServiceTest;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
-
-    @Autowired
-    public CategoryServiceImpl categoryService;
+    private CategoryServiceImpl toTest;
 
     @Test
-    void saveCategory() {
-        //Given
-        CategoryRequestDto categoryRequestDto = CategoryRequestDto
-                .builder()
-                .name("Test")
-                .description("Test description")
-                .build();
+    void verifyTheServiceReturnsCorrectResultWhenSaveCategory() {
+      CategoryRequestDto categoryRequestDto = new CategoryRequestDto();
 
-        GenericResponse genericResponse = new GenericResponse("test", LocalDateTime.now());
+      CategoryModel testCategoryModel = new CategoryModel();
+      testCategoryModel.setDescription(null);
 
-        String nameExpected = "Test";
-        //When
-        categoryService = new CategoryServiceImpl(categoryRequestDto);
-        Mockito.when(categoryService.saveCategory(categoryRequestDto)).thenReturn(genericResponse);
-        //Comportamiento del mock
-        when(categoryRepository.existsByName(categoryRequestDto.getName())).thenReturn(false);
-        //when(categoryRepository.save(categoryRequestDto)).thenReturn(categoryRequestDto);
-        //Then
-        assertNotNull(categoryRequestDto);
-        verify(categoryRepository, times(1)).existsByName(categoryRequestDto.getName());
-        verify(categoryService.saveCategory(categoryRequestDto), times(1));
+      when(categoryDtoMapper.dtoToModel(categoryRequestDto))
+              .thenReturn(testCategoryModel);
+
+      assertThrows(InvalidDescriptionException.class, () ->
+              toTest.saveCategory(categoryRequestDto));
+      verify(iCategoryServicePort, never()).saveCategory(any());
+
+    }
+
+    @Test
+    void givenDateWhenCategorySavedSuccessfully() {
+        CategoryRequestDto categoryRequestDto = new CategoryRequestDto();
+
+        CategoryModel testCategoryModel = new CategoryModel();
+        testCategoryModel.setDescription("Description Text");
+
+        when(categoryDtoMapper.dtoToModel(categoryRequestDto))
+                .thenReturn(testCategoryModel);
+        GenericResponse genericResponse = toTest.saveCategory(categoryRequestDto);
+        assertNotNull(genericResponse);
+        assertEquals(CategoryServiceImpl.CATEGORY_CREATED_SUCCESFULLY,
+                genericResponse.getMessage());
+        assertNotNull(genericResponse.getDate());
+
     }
 }

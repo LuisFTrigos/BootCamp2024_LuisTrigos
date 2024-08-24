@@ -6,6 +6,7 @@ import com.example.tienda_emazon.infrastructure.out.entity.CategoryEntity;
 import com.example.tienda_emazon.infrastructure.out.mapper.CategoryEntityMapper;
 import com.example.tienda_emazon.infrastructure.out.respository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -31,4 +32,5 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
     public CategoryModel findCategoryByName(String name) {
         return categoryEntityMapper.entityToModel(categoryRepository.findByName(name).orElse(null));
     }
+
 }
