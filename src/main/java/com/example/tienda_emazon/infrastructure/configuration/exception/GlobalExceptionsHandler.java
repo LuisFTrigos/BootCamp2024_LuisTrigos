@@ -1,5 +1,6 @@
 package com.example.tienda_emazon.infrastructure.configuration.exception;
 
+import com.example.tienda_emazon.domain.exception.BrandAlreadyExistsException;
 import com.example.tienda_emazon.domain.exception.CategoryAlreadyExistsException;
 import com.example.tienda_emazon.application.dto.response.ErrorResponse;
 import com.example.tienda_emazon.domain.exception.InvalidDescriptionException;
@@ -21,9 +22,15 @@ public class GlobalExceptionsHandler {
     @ExceptionHandler(InvalidDescriptionException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ErrorResponse handlerInvalidDescription(InvalidDescriptionException
-                                                                      ex) {
-        return new ErrorResponse("Descripciín invalida" , ex.getMessage());
+    public ErrorResponse handlerInvalidDescription(InvalidDescriptionException ex) {
+        return new ErrorResponse("Descripción invalida" , ex.getMessage());
+    }
+
+    @ExceptionHandler(BrandAlreadyExistsException.class)
+    @ResponseStatus
+    @ResponseBody
+    public ErrorResponse handlerBrandAlreadyExistException(BrandAlreadyExistsException brandAlreadyExistsException){
+        return new ErrorResponse("Marca ya existente", brandAlreadyExistsException.getMessage());
     }
 
 }

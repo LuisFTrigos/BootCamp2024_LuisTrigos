@@ -6,7 +6,6 @@ import com.example.tienda_emazon.infrastructure.out.entity.CategoryEntity;
 import com.example.tienda_emazon.infrastructure.out.mapper.CategoryEntityMapper;
 import com.example.tienda_emazon.infrastructure.out.respository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 
