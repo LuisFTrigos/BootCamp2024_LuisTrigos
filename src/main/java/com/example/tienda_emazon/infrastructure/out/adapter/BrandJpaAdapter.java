@@ -31,4 +31,5 @@ public class BrandJpaAdapter implements IBrandPersistencePort {
         return brandEntityMapper.entityToModel
                 (brandRepository.findByName(name).orElse(null));
     }
+
 }

@@ -4,8 +4,9 @@ import com.example.tienda_emazon.domain.api.IBrandServicePort;
 import com.example.tienda_emazon.domain.exception.BrandAlreadyExistsException;
 import com.example.tienda_emazon.domain.model.BrandModel;
 import com.example.tienda_emazon.domain.spi.IBrandPersistencePort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 public class BrandUseCase implements IBrandServicePort {
 
@@ -26,7 +27,9 @@ public class BrandUseCase implements IBrandServicePort {
     }
 
     @Override
-    public List<BrandModel> listBrand() {
-        return iBrandPersistencePort.listBrand();
+    public Page<BrandModel> findAll(Pageable pageable) {
+        return null;
     }
+
+
 }

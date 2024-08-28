@@ -17,7 +17,8 @@ public class BeanBrandConfiguration {
     private final BrandEntityMapper brandEntityMapper;
 
     @Bean
-    public IBrandServicePort iBrandServicePort(){return  new BrandUseCase(iBrandPersistencePort());
+    public IBrandServicePort iBrandServicePort(){
+        return  new BrandUseCase(iBrandPersistencePort());
     }
 
     @Bean

@@ -11,4 +11,6 @@ public interface IBrandPersistencePort {
     Page<BrandEntity> pageBrand(int pageNumber, int pageSize);
 
     BrandModel findBrandByName(String name);
+
+
 }

@@ -14,5 +14,4 @@ public interface BrandEntityMapper {
 
     BrandEntity modelToEntity(BrandModel brandModel);
     BrandModel entityToModel(BrandEntity brandEntity);
-    Page<BrandModel> toBrandPage(Page<BrandEntity> brandEntityPage);
 }
