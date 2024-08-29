@@ -29,7 +29,8 @@ public class BrandServiceImpl implements IBrandService {
     @Override
     public GenericResponse saveBrand(BrandRequestDto brandRequestDto) {
         BrandModel brandModel = brandDtoMapper.dtoToModel(brandRequestDto);
-        if (brandModel.getDescription() == null) throw new InvalidDescriptionException("Descripción no valida");
+        if (brandModel.getDescription() != null)
+            throw new InvalidDescriptionException("Descripción no valida");
         brandServicePort.saveBrand(brandModel);
         GenericResponse response = new GenericResponse();
         response.setMessage(BRAND_CREATED_SUCCESFULLY);
@@ -39,10 +40,19 @@ public class BrandServiceImpl implements IBrandService {
 
     @Override
     public Page<BrandModel> getAll(PageableQuery pageableQuery) {
-        Sort sort = Sort.by(Sort.Direction.fromString(pageableQuery.getInOrder()),
-                pageableQuery.getSortedBy());
-        Pageable pageable = PageRequest.of(pageableQuery.getPage(),
-                pageableQuery.getItemsPerPage(), sort);
-        return brandServicePort.findAll(pageable);
+        try {
+            String order = pageableQuery.getInOrder() != null ? pageableQuery.getInOrder() : "asc";
+            String sortedBy = pageableQuery.getSortedBy() != null && !pageableQuery.getSortedBy().isEmpty()
+                    ? pageableQuery.getSortedBy()
+                    : "name";
+
+            Sort sort = Sort.by(Sort.Direction.fromString(order), sortedBy);
+            Pageable pageable = PageRequest.of(pageableQuery.getPage(), pageableQuery.getItemsPerPage(), sort);
+            return brandServicePort.findAll(pageable);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return Page.empty();
     }
 }
