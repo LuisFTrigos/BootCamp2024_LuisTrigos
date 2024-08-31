@@ -7,7 +7,7 @@ import com.example.tienda_emazon.application.service.IBrandService;
 import com.example.tienda_emazon.domain.api.IBrandServicePort;
 import com.example.tienda_emazon.domain.exception.InvalidDescriptionException;
 import com.example.tienda_emazon.domain.model.BrandModel;
-import com.example.tienda_emazon.domain.model.PageableQuery;
+import com.example.tienda_emazon.domain.model.query.PageableQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

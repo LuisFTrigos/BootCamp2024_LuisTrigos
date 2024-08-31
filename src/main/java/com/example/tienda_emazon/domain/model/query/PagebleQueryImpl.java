@@ -1,6 +1,6 @@
-package com.example.tienda_emazon.domain.model;
+package com.example.tienda_emazon.domain.model.query;
 
-public class PagebleQueryImpl implements PageableQuery{
+public class PagebleQueryImpl implements PageableQuery {
 
     private int page;
     private int itemsPerPage;

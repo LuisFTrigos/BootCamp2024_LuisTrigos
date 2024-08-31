@@ -6,7 +6,7 @@ import com.example.tienda_emazon.application.mapper.SupplyDtoMapper;
 import com.example.tienda_emazon.application.service.ISupplyService;
 import com.example.tienda_emazon.domain.api.ISupplyServicePort;
 import com.example.tienda_emazon.domain.exception.InvalidDescriptionException;
-import com.example.tienda_emazon.domain.model.PageableQuery;
+import com.example.tienda_emazon.domain.model.query.PageableQuery;
 import com.example.tienda_emazon.domain.model.SupplyModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -40,10 +40,19 @@ public class SupplyServiceImpl implements ISupplyService {
 
     @Override
     public Page<SupplyModel> getAllPages(PageableQuery pageableQuery) {
-        Sort sort = Sort.by(Sort.Direction.fromString(pageableQuery.getInOrder()),
-                pageableQuery.getSortedBy());
-        Pageable pageable = PageRequest.of(pageableQuery.getPage(),
-                pageableQuery.getItemsPerPage(), sort);
-        return iSupplyServicePort.pageSupply(pageable);
+        try {
+            String order = pageableQuery.getInOrder() != null ? pageableQuery.getInOrder() : "asc";
+            String sortedBy = pageableQuery.getSortedBy() != null && !pageableQuery.getSortedBy().isEmpty()
+                    ? pageableQuery.getSortedBy()
+                    : "name";
+
+            Sort sort = Sort.by(Sort.Direction.fromString(order), sortedBy);
+            Pageable pageable = PageRequest.of(pageableQuery.getPage(), pageableQuery.getItemsPerPage(), sort);
+            return iSupplyServicePort.pageSupply(pageable);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return Page.empty();
     }
 }
