@@ -1,8 +1,8 @@
 package com.example.tienda_emazon.infrastructure.in.rest;
 
-import com.example.tienda_emazon.application.dto.request.BrandRequestDto;
+import com.example.tienda_emazon.application.dto.request.SupplyRequestDto;
 import com.example.tienda_emazon.application.dto.response.GenericResponse;
-import com.example.tienda_emazon.application.service.IBrandService;
+import com.example.tienda_emazon.application.service.ISupplyService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,36 +20,40 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(BrandController.class)
+@WebMvcTest(SupplyController.class)
 
-class BrandControllerTest {
+class SupplyControllerTest {
+
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private IBrandService iBrandService;
+    private ISupplyService supplyService;
 
     @InjectMocks
-    private BrandController brandController;
+    private SupplyController supplyController;
     @BeforeEach
-    void setUp(){
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void saveBrand() throws Exception {
-        BrandRequestDto brandRequestDto = new BrandRequestDto();
-        brandRequestDto.setName("Test Dto");
-        brandRequestDto.setDescription("Second Test");
+    void givenAValidArgumentWhenSupplySavedSuccesfully() throws Exception {
+        SupplyRequestDto supplyRequestDto = new SupplyRequestDto();
+        supplyRequestDto.setNameSupply("Test Dto");
+        supplyRequestDto.setDescriptionSupply("Second Test");
+        supplyRequestDto.setDescriptionSupply("Third Test");
+        supplyRequestDto.setPriceSupply(100L);
         GenericResponse genericResponse = GenericResponse.builder()
-                .message("Brand Message")
+                .message("Supply Message")
                 .date(LocalDateTime.now())
                 .build();
-        when(iBrandService.saveBrand(brandRequestDto)).thenReturn(genericResponse);
+        when(supplyService.saveSupply(supplyRequestDto)).thenReturn(genericResponse);
         ObjectMapper objectMapper = new ObjectMapper();
-        String brandRequestJson = objectMapper.writeValueAsString(brandRequestDto);
-        mockMvc.perform(post("/api/brand/create")
+        String supplyRequestJson = objectMapper.writeValueAsString(supplyRequestDto);
+        mockMvc.perform(post("/api/supply/create")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(brandRequestJson)
+                .content(supplyRequestJson)
         ).andExpect(status().isCreated());
     }
+
 }
