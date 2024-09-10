@@ -1,10 +1,11 @@
 package com.example.tienda_emazon.domain.model;
 
+
 public class BrandModel {
 
     private long id;
-    private String name;
-    private String description;
+    private String brandName;
+    private String brandDescription;
 
 
     public BrandModel() { /**/
@@ -18,19 +19,19 @@ public class BrandModel {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getBrandName() {
+        return brandName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getBrandDescription() {
+        return brandDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setBrandDescription(String brandDescription) {
+        this.brandDescription = brandDescription;
     }
 }

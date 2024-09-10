@@ -1,10 +1,10 @@
-package com.example.tienda_emazon.application.service.impl;
+package com.example.tienda_emazon.application.handler.impl;
 
 import com.example.tienda_emazon.application.dto.request.BrandRequestDto;
 import com.example.tienda_emazon.application.dto.response.GenericResponse;
 import com.example.tienda_emazon.application.mapper.BrandDtoMapper;
 import com.example.tienda_emazon.domain.api.IBrandServicePort;
-import com.example.tienda_emazon.domain.exception.InvalidDescriptionException;
+import com.example.tienda_emazon.domain.exception.InvalidArgumentException;
 import com.example.tienda_emazon.domain.model.BrandModel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,21 +25,21 @@ import static org.mockito.Mockito.*;
     @Mock
     private IBrandServicePort iBrandServicePort;
     @InjectMocks
-    private BrandServiceImpl toTest;
+    private BrandHandlerImpl toTest;
 
     @Test
     void verifyTheServiceReturnsCorrectResultWhenSaveBrand() {
         BrandRequestDto brandRequestDto = new BrandRequestDto();
 
         BrandModel testBrandModel = new BrandModel();
-        testBrandModel.setDescription(null);
+        testBrandModel.setBrandDescription(null);
 
         when(brandDtoMapper.dtoToModel(brandRequestDto))
                 .thenReturn(testBrandModel);
 
-        assertThrows(InvalidDescriptionException.class, () ->
+        assertThrows(InvalidArgumentException.class, () ->
                 toTest.saveBrand(brandRequestDto));
-        verify(iBrandServicePort, never()).saveBrand(any());
+        verify(iBrandServicePort, never()).createBrand(any());
 
     }
 
@@ -48,13 +48,13 @@ import static org.mockito.Mockito.*;
         BrandRequestDto brandRequestDto = new BrandRequestDto();
 
         BrandModel testBrandModel = new BrandModel();
-        testBrandModel.setDescription("Description Text");
+        testBrandModel.setBrandDescription("Description Text");
 
         when(brandDtoMapper.dtoToModel(brandRequestDto))
                 .thenReturn(testBrandModel);
         GenericResponse genericResponse = toTest.saveBrand(brandRequestDto);
         assertNotNull(genericResponse);
-        assertEquals(BrandServiceImpl.BRAND_CREATED_SUCCESFULLY,
+        assertEquals(BrandHandlerImpl.BRAND_CREATED_SUCCESFULLY,
                 genericResponse.getMessage());
         assertNotNull(genericResponse.getDate());
 

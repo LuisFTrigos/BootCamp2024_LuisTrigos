@@ -1,13 +1,12 @@
 package com.example.tienda_emazon.domain.api;
 
 import com.example.tienda_emazon.domain.model.CategoryModel;
-
-import java.util.List;
+import com.example.tienda_emazon.domain.model.page.CustomPage;
+import com.example.tienda_emazon.domain.model.page.PageRequestDomain;
 
 public interface ICategoryServicePort {
 
-    void saveCategory(CategoryModel categoryModel);
-
-    List<CategoryModel> listCategory();
+    CategoryModel createCategory(CategoryModel categoryModel);
+    CustomPage<CategoryModel> getAllPages(PageRequestDomain pageRequestDomain);
 
 }

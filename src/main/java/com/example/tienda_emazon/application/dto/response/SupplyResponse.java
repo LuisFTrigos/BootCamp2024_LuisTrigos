@@ -14,8 +14,8 @@ public class SupplyResponse {
 
     private String supplyDescription;
 
-    private long supplyAmount;
+    private Long supplyAmount;
 
-    private long supplyPrice;
+    private Long supplyPrice;
 
 }

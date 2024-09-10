@@ -1,14 +1,14 @@
 package com.example.tienda_emazon.domain.spi;
 
 import com.example.tienda_emazon.domain.model.SupplyModel;
-import com.example.tienda_emazon.infrastructure.out.entity.SupplyEntity;
-import org.springframework.data.domain.Page;
+import com.example.tienda_emazon.domain.model.page.CustomPage;
+import com.example.tienda_emazon.domain.model.page.PageRequestDomain;
+import java.util.Optional;
 
 public interface ISupplyPersistencePort {
 
-    void saveSupply(SupplyModel supplyModel);
-
-    Page<SupplyEntity> pageSupply(int pageNumber, int pageSize);
-
-    SupplyModel findSupplyByName(String name);
+    SupplyModel saveSupply(SupplyModel supplyModel);
+    CustomPage<SupplyModel> findAllPaginated(PageRequestDomain pageRequest);
+    Optional<SupplyModel> findBySupplyName(String supplyName);
+    boolean existsBySupplyName(String supplyName);
 }

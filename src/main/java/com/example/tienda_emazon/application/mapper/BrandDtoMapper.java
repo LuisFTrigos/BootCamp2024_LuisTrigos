@@ -21,7 +21,7 @@ public interface BrandDtoMapper {
         return modelList.stream().map(brandModel-> {
             GenericResponse genericResponse = new GenericResponse();
             genericResponse.setDate(LocalDateTime.now());
-            genericResponse.setMessage(brandModel.getDescription());
+            genericResponse.setMessage(brandModel.getBrandDescription());
             return genericResponse;
         }).toList();
     }

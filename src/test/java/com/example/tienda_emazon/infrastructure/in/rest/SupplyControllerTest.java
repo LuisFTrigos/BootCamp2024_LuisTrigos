@@ -2,7 +2,7 @@ package com.example.tienda_emazon.infrastructure.in.rest;
 
 import com.example.tienda_emazon.application.dto.request.SupplyRequestDto;
 import com.example.tienda_emazon.application.dto.response.GenericResponse;
-import com.example.tienda_emazon.application.service.ISupplyService;
+import com.example.tienda_emazon.application.handler.ISupplyHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ class SupplyControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private ISupplyService supplyService;
+    private ISupplyHandler supplyService;
 
     @InjectMocks
     private SupplyController supplyController;
@@ -39,10 +39,10 @@ class SupplyControllerTest {
     @Test
     void givenAValidArgumentWhenSupplySavedSuccesfully() throws Exception {
         SupplyRequestDto supplyRequestDto = new SupplyRequestDto();
-        supplyRequestDto.setNameSupply("Test Dto");
-        supplyRequestDto.setDescriptionSupply("Second Test");
-        supplyRequestDto.setDescriptionSupply("Third Test");
-        supplyRequestDto.setPriceSupply(100L);
+        supplyRequestDto.setSupplyName("Test Dto");
+        supplyRequestDto.setSupplyDescription("Second Test");
+        supplyRequestDto.setSupplyAmount(200L);
+        supplyRequestDto.setSupplyPrice(100L);
         GenericResponse genericResponse = GenericResponse.builder()
                 .message("Supply Message")
                 .date(LocalDateTime.now())

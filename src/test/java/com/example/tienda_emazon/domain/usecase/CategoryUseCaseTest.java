@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -33,53 +34,31 @@ class CategoryUseCaseTest {
     @Test
     void givenValidCategoryWhenSavingThenShouldSaveCategorySuccessfully() {
         CategoryModel categoryModel = new CategoryModel();
-        categoryModel.setName("Category Test");
+        categoryModel.setCategoryName("Category Test");
 
-        Mockito.when(iCategoryPersistencePort.findCategoryByName
-                (categoryModel.getName())).thenReturn(null);
+        Mockito.when(iCategoryPersistencePort.findByCategoryName(categoryModel.getCategoryName())).thenReturn(null);
 
-        toTest.saveCategory(categoryModel);
+        toTest.createCategory(categoryModel);
 
         verify(iCategoryPersistencePort,
                 times(1))
-                .saveCategory(categoryModel);
-        assertEquals("Category Test", categoryModel.getName());
+                .createCategory(categoryModel);
+        assertEquals("Category Test", categoryModel.getCategoryName());
     }
 
     @Test
     void givenCategoryWhenCategoryAlreadyExistThenShouldThrowException() {
         CategoryModel categoryModel = new CategoryModel();
-        categoryModel.setName("Category Test");
+        categoryModel.setCategoryName("Category Test");
+        //Optional<CategoryModel> categoryModelOptional = Optional.of(categoryModel);
 
-        Mockito.when(iCategoryPersistencePort.findCategoryByName
-                (categoryModel.getName())).thenReturn(new CategoryModel());
+        Mockito.when(iCategoryPersistencePort.findByCategoryName(categoryModel.getCategoryName()))
+                .thenReturn(Optional.of(categoryModel));
 
         assertThrows(CategoryAlreadyExistsException.class,
-                () -> toTest.saveCategory(categoryModel));
+                () -> toTest.createCategory(categoryModel));
         verify(iCategoryPersistencePort,
                         Mockito.never())
-                .saveCategory(any(CategoryModel.class));
-    }
-
-
-    @Test
-    void givenAListWhenInvokeListCategoryThenShouldReturnTheList() {
-        CategoryModel testCategory1 = new CategoryModel();
-        testCategory1.setName("Category 1");
-
-        CategoryModel testCategory2 = new CategoryModel();
-        testCategory2.setName("Category 2");
-
-        List<CategoryModel> testListCategory =
-                Arrays.asList(testCategory1, testCategory2);
-
-        Mockito.when(iCategoryPersistencePort.listCategory())
-                .thenReturn(testListCategory);
-
-        List<CategoryModel> actuallyList = toTest.listCategory();
-        verify(iCategoryPersistencePort,
-                times(1)).listCategory();
-
-        assertEquals(testListCategory, actuallyList);
+                .createCategory(any(CategoryModel.class));
     }
 }

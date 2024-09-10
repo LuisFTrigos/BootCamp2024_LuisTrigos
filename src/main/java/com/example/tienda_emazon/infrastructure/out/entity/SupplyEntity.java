@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -12,30 +11,26 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @EqualsAndHashCode
+@Builder
 @Table(name = "supplies")
 public class SupplyEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idSupply;
-    @Column(unique = true, length = 50)
-    private String name;
-    @Column(length = 100)
-    private String descriptionSupply;
-    @Column
-    private long amountSupply;
-    @Column
-    private long priceSupply;
+    private long id;
+    private String supplyName;
+    private String supplyDescription;
+    private long amount;
+    private long price;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "brandId", nullable = false)
-    private BrandEntity brandEntity;
+    /*@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "brandId")
+    private BrandEntity brandEntity;*/
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
+    //@ManyToMany(fetch = FetchType.EAGER)
+    /*@JoinTable(
             name = "supply_category",
             joinColumns = @JoinColumn(name = "supplyId"),
-            inverseJoinColumns = @JoinColumn(name = "categoryId"))
-    List<CategoryEntity> supplyCategories;
-
+            inverseJoinColumns = @JoinColumn(name = "categoryId"))*/
+    //private List<CategoryEntity> supplyCategories;
 }

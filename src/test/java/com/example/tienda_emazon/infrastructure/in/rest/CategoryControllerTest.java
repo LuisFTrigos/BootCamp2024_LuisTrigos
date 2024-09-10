@@ -2,8 +2,9 @@ package com.example.tienda_emazon.infrastructure.in.rest;
 
 import com.example.tienda_emazon.application.dto.request.CategoryRequestDto;
 import com.example.tienda_emazon.application.dto.response.GenericResponse;
-import com.example.tienda_emazon.application.service.ICategoryService;
+import com.example.tienda_emazon.application.handler.ICategoryHandler;
 import com.example.tienda_emazon.domain.model.CategoryModel;
+import com.example.tienda_emazon.domain.model.page.PageRequestDomain;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,7 +31,7 @@ class CategoryControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private ICategoryService categoryService;
+    private ICategoryHandler categoryService;
 
     @InjectMocks
     private CategoryController categoryController;
@@ -42,8 +43,8 @@ class CategoryControllerTest {
     @Test
     void saveCategory() throws Exception {
         CategoryRequestDto categoryRequestDto = new CategoryRequestDto();
-        categoryRequestDto.setName("Test Dto");
-        categoryRequestDto.setDescription("Second Test");
+        categoryRequestDto.setCategoryName("Test Dto");
+        categoryRequestDto.setCategoryDescription("Second Test");
         GenericResponse genericResponse = GenericResponse.builder()
                 .message("Category Message")
                 .date(LocalDateTime.now())
@@ -60,7 +61,7 @@ class CategoryControllerTest {
     @Test
     void getAllCategoriesList() throws Exception {
         List<CategoryModel> categoryTestList = Arrays.asList(new CategoryModel(), new CategoryModel());
-        when(categoryService.getAllCategories()).thenReturn(categoryTestList);
+        when(categoryService.getCategoriesPaginated(new PageRequestDomain())).thenReturn(categoryTestList);
         mockMvc.perform(get("/api/category"))
                 .andExpect(status().isOk());
     }

@@ -21,7 +21,7 @@ public interface CategoryDtoMapper {
         return modelList.stream().map(categoryModel -> {
         GenericResponse genericResponse = new GenericResponse();
         genericResponse.setDate(LocalDateTime.now());
-        genericResponse.setMessage(categoryModel.getDescription());
+        genericResponse.setMessage(categoryModel.getCategoryDescription());
         return genericResponse;
         }).toList();
     }

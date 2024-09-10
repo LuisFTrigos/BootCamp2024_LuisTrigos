@@ -1,12 +1,23 @@
 package com.example.tienda_emazon.domain.model;
 
+import java.util.List;
+
 public class SupplyModel {
 
     private long id;
-    private String name;
-    private String description;
-    private long amount;
-    private long price;
+    private String supplyName;
+    private String supplyDescription;
+    private List<String> associatedCategories;
+    private long supplyAmount;
+    private long supplyPrice;
+
+    public List<String> getAssociatedCategories() {
+        return associatedCategories;
+    }
+
+    public void setAssociatedCategories(List<String> associatedCategories) {
+        this.associatedCategories = associatedCategories;
+    }
 
     public long getId() {
         return id;
@@ -16,35 +27,35 @@ public class SupplyModel {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getSupplyName() {
+        return supplyName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSupplyName(String supplyName) {
+        this.supplyName = supplyName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getSupplyDescription() {
+        return supplyDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSupplyDescription(String supplyDescription) {
+        this.supplyDescription = supplyDescription;
     }
 
-    public long getAmount() {
-        return amount;
+    public long getSupplyAmount() {
+        return supplyAmount;
     }
 
-    public void setAmount(long amount) {
-        this.amount = amount;
+    public void setSupplyAmount(long supplyAmount) {
+        this.supplyAmount = supplyAmount;
     }
 
-    public long getPrice() {
-        return price;
+    public long getSupplyPrice() {
+        return supplyPrice;
     }
 
-    public void setPrice(long price) {
-        this.price = price;
+    public void setSupplyPrice(long supplyPrice) {
+        this.supplyPrice = supplyPrice;
     }
 }

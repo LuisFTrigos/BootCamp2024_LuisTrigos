@@ -1,16 +1,17 @@
 package com.example.tienda_emazon.domain.spi;
 
 import com.example.tienda_emazon.domain.model.BrandModel;
-import com.example.tienda_emazon.infrastructure.out.entity.BrandEntity;
-import org.springframework.data.domain.Page;
+import com.example.tienda_emazon.domain.model.page.CustomPage;
+import com.example.tienda_emazon.domain.model.page.PageRequestDomain;
+
+import java.util.Optional;
 
 public interface IBrandPersistencePort {
 
-    void saveBrand(BrandModel brandModel);
-
-    Page<BrandEntity> pageBrand(int pageNumber, int pageSize);
-
-    BrandModel findBrandByName(String name);
+    BrandModel saveBrand(BrandModel brandModel);
+    CustomPage<BrandModel> findAllPaginatedBrand(PageRequestDomain pageRequest);
+    boolean existsByBrandName(String brandName);
+    Optional<BrandModel> findByBrandName(String brandName);
 
 
 }

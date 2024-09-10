@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -30,29 +32,29 @@ class BrandUseCaseTest {
     @Test
     void givenValidBrandWhenSavingThenShouldSaveBrandSuccessfully() {
         BrandModel brandModel = new BrandModel();
-        brandModel.setName("Brand Test");
+        brandModel.setBrandName("Brand Test");
 
-        Mockito.when(iBrandPersistencePort.findBrandByName
-                (brandModel.getName())).thenReturn(null);
+        Mockito.when(iBrandPersistencePort.findByBrandName
+                (brandModel.getBrandName())).thenReturn(null);
 
-        toTest.saveBrand(brandModel);
+        toTest.createBrand(brandModel);
 
         verify(iBrandPersistencePort,
                 times(1))
                 .saveBrand(brandModel);
-        assertEquals("Brand Test", brandModel.getName());
+        assertEquals("Brand Test", brandModel.getBrandName());
     }
 
     @Test
     void givenBrandWhenBrandAlreadyExistThenShouldThrowException() {
         BrandModel brandModel = new BrandModel();
-        brandModel.setName("Brand Test");
+        brandModel.setBrandName("Brand Test");
 
-        Mockito.when(iBrandPersistencePort.findBrandByName
-                (brandModel.getName())).thenReturn(new BrandModel());
+        Mockito.when(iBrandPersistencePort.findByBrandName
+                (brandModel.getBrandName())).thenReturn(Optional.of(brandModel));
 
         assertThrows(BrandAlreadyExistsException.class,
-                () -> toTest.saveBrand(brandModel));
+                () -> toTest.createBrand(brandModel));
         verify(iBrandPersistencePort,
                 Mockito.never())
                 .saveBrand(any(BrandModel.class));

@@ -3,9 +3,12 @@ package com.example.tienda_emazon.domain.usecase;
 import com.example.tienda_emazon.domain.api.ICategoryServicePort;
 import com.example.tienda_emazon.domain.exception.CategoryAlreadyExistsException;
 import com.example.tienda_emazon.domain.model.CategoryModel;
+import com.example.tienda_emazon.domain.model.page.CustomPage;
+import com.example.tienda_emazon.domain.model.page.PageRequestDomain;
 import com.example.tienda_emazon.domain.spi.ICategoryPersistencePort;
+import com.example.tienda_emazon.domain.util.FieldValidations;
 
-import java.util.List;
+import static com.example.tienda_emazon.domain.util.DomainConstants.CATEGORY_ALREADY_EXIST;
 
 public class CategoryUseCase implements ICategoryServicePort {
 
@@ -16,18 +19,18 @@ public class CategoryUseCase implements ICategoryServicePort {
     }
 
     @Override
-    public void saveCategory(CategoryModel categoryModel) {
-        CategoryModel categoryName = categoryPersistencePort.findCategoryByName(categoryModel.getName());
-        if (categoryName != null) {
-            throw new CategoryAlreadyExistsException("Categoría con nombre: " + categoryModel.getName() + " ya existe");
+    public CategoryModel createCategory(CategoryModel categoryModel){
+        FieldValidations.validateFieldName(categoryModel.getCategoryName());
+        FieldValidations.validateFieldDescription(categoryModel.getCategoryDescription());
+        if(categoryPersistencePort.existsByCategoryName(categoryModel.getCategoryName())) {
+            throw new CategoryAlreadyExistsException(CATEGORY_ALREADY_EXIST + categoryModel.getCategoryName());
         }
-
-        categoryPersistencePort.saveCategory(categoryModel);
+        return categoryPersistencePort.createCategory(categoryModel);
     }
 
     @Override
-    public List<CategoryModel> listCategory() {
-        return categoryPersistencePort.listCategory();
+    public CustomPage<CategoryModel> getAllPages(PageRequestDomain pageRequestDomain) {
+        return categoryPersistencePort.getCategoriesPaginated(pageRequestDomain);
     }
 
 }

@@ -3,9 +3,8 @@ package com.example.tienda_emazon.domain.model;
 public class CategoryModel {
 
     private long id;
-    private String name;
-    private String description;
-
+    private String categoryName;
+    private String categoryDescription;
 
     public CategoryModel() { /**/
     }
@@ -18,19 +17,19 @@ public class CategoryModel {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCategoryDescription() {
+        return categoryDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCategoryDescription(String categoryDescription) {
+        this.categoryDescription = categoryDescription;
     }
 }

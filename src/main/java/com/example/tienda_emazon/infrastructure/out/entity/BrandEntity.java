@@ -1,13 +1,14 @@
 package com.example.tienda_emazon.infrastructure.out.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -17,9 +18,10 @@ public class BrandEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(unique = true, length = 50)
-    private String name;
-    @Column(length = 120)
-    private String description;
+    private String brandName;
+    private String brandDescription;
+    /*@ManyToMany(mappedBy = "supplyBrand", fetch = FetchType.EAGER)
+    private Set<SupplyEntity> supplies = new HashSet<>();*/
+
 
 }

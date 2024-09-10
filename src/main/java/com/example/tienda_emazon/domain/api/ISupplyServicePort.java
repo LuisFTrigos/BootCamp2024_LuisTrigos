@@ -1,12 +1,11 @@
 package com.example.tienda_emazon.domain.api;
 
 import com.example.tienda_emazon.domain.model.SupplyModel;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.example.tienda_emazon.domain.model.page.CustomPage;
+import com.example.tienda_emazon.domain.model.page.PageRequestDomain;
 
 public interface ISupplyServicePort {
 
-    void saveSupply(SupplyModel supplyModel);
-
-    Page<SupplyModel> pageSupply(Pageable pageable);
+    SupplyModel createSupply(SupplyModel supplyModel);
+    CustomPage<SupplyModel> getSuppliesPaginated(PageRequestDomain pageRequest);
 }

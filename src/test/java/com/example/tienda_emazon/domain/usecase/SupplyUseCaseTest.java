@@ -1,7 +1,6 @@
 package com.example.tienda_emazon.domain.usecase;
 
 import com.example.tienda_emazon.domain.exception.SupplyAlreadyExistsException;
-import com.example.tienda_emazon.domain.model.CategoryModel;
 import com.example.tienda_emazon.domain.model.SupplyModel;
 import com.example.tienda_emazon.domain.spi.ISupplyPersistencePort;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,8 +10,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -35,29 +33,29 @@ class SupplyUseCaseTest {
     @Test
     void givenValidSupplyWhenSavingThenShouldSaveSupplySuccessfully() {
         SupplyModel supplyModel = new SupplyModel();
-        supplyModel.setName("Supply Test");
+        supplyModel.setSupplyName("Supply Test");
 
-        Mockito.when(iSupplyPersistencePort.findSupplyByName
-                (supplyModel.getName())).thenReturn(null);
+        Mockito.when(iSupplyPersistencePort.findBySupplyName
+                (supplyModel.getSupplyName())).thenReturn(null);
 
-        toTest.saveSupply(supplyModel);
+        toTest.createSupply(supplyModel);
 
         verify(iSupplyPersistencePort,
                 times(1))
                 .saveSupply(supplyModel);
-        assertEquals("Supply Test", supplyModel.getName());
+        assertEquals("Supply Test", supplyModel.getSupplyName());
     }
 
     @Test
     void givenSupplyWhenSupplyAlreadyExistThenShouldThrowException() {
         SupplyModel supplyModel = new SupplyModel();
-        supplyModel.setName("Supply Test");
+        supplyModel.setSupplyName("Supply Test");
 
-        Mockito.when(iSupplyPersistencePort.findSupplyByName
-                (supplyModel.getName())).thenReturn(new SupplyModel());
+        Mockito.when(iSupplyPersistencePort.findBySupplyName
+                (supplyModel.getSupplyName())).thenReturn(Optional.of(supplyModel) );
 
         assertThrows(SupplyAlreadyExistsException.class,
-                () -> toTest.saveSupply(supplyModel));
+                () -> toTest.createSupply(supplyModel));
         verify(iSupplyPersistencePort,
                 Mockito.never())
                 .saveSupply(any(SupplyModel.class));

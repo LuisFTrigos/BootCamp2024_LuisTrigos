@@ -2,7 +2,7 @@ package com.example.tienda_emazon.infrastructure.in.rest;
 
 import com.example.tienda_emazon.application.dto.request.BrandRequestDto;
 import com.example.tienda_emazon.application.dto.response.GenericResponse;
-import com.example.tienda_emazon.application.service.IBrandService;
+import com.example.tienda_emazon.application.handler.IBrandHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,7 @@ class BrandControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private IBrandService iBrandService;
+    private IBrandHandler iBrandHandler;
 
     @InjectMocks
     private BrandController brandController;
@@ -38,13 +38,13 @@ class BrandControllerTest {
     @Test
     void saveBrand() throws Exception {
         BrandRequestDto brandRequestDto = new BrandRequestDto();
-        brandRequestDto.setName("Test Dto");
-        brandRequestDto.setDescription("Second Test");
+        brandRequestDto.setBrandName("Test Dto");
+        brandRequestDto.setBrandDescription("Second Test");
         GenericResponse genericResponse = GenericResponse.builder()
                 .message("Brand Message")
                 .date(LocalDateTime.now())
                 .build();
-        when(iBrandService.saveBrand(brandRequestDto)).thenReturn(genericResponse);
+        when(iBrandHandler.saveBrand(brandRequestDto)).thenReturn(genericResponse);
         ObjectMapper objectMapper = new ObjectMapper();
         String brandRequestJson = objectMapper.writeValueAsString(brandRequestDto);
         mockMvc.perform(post("/api/brand/create")
