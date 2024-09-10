@@ -27,7 +27,7 @@ public class CategoryController {
     public ResponseEntity<CustomPage<CategoryModel>> getAllCategoriesList(@RequestParam(defaultValue = "0") int page,
                                                                           @RequestParam(defaultValue = "10") int size,
                                                                           @RequestParam(defaultValue = "asc") String sortDirection,
-                                                                          @RequestParam(defaultValue = "articleName") String sortBy) {
+                                                                          @RequestParam(defaultValue = "categoryName") String sortBy) {
 
         return ResponseEntity.ok(categoryHandler.getCategoriesPaginated(new PageRequestDomain(page, size, sortDirection, sortBy)));
     }

@@ -21,6 +21,6 @@ public class CategoryEntity {
     private Long id;
     private String categoryName;
     private String categoryDescription;
-    //@ManyToMany(mappedBy = "supplyCategories", fetch = FetchType.EAGER)
-    //private Set<SupplyEntity> supplies = new HashSet<>();
+    @ManyToMany(mappedBy = "supplyCategories", fetch = FetchType.EAGER)
+    private Set<SupplyEntity> supplies = new HashSet<>();
 }

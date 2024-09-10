@@ -27,7 +27,7 @@ public class BrandController {
     public ResponseEntity<CustomPage<BrandModel>> getBrands(@RequestParam(defaultValue = "0") int page,
                                                             @RequestParam(defaultValue = "10") int size,
                                                             @RequestParam(defaultValue = "asc") String sortDirection,
-                                                            @RequestParam(defaultValue = "articleName") String sortBy) {
+                                                            @RequestParam(defaultValue = "brandName") String sortBy) {
 
         return ResponseEntity.ok(brandHandler.getBrandsPaginated(new PageRequestDomain(page, size, sortDirection, sortBy)));
     }

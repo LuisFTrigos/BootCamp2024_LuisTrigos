@@ -20,8 +20,8 @@ public class BrandEntity {
     private long id;
     private String brandName;
     private String brandDescription;
-    /*@ManyToMany(mappedBy = "supplyBrand", fetch = FetchType.EAGER)
-    private Set<SupplyEntity> supplies = new HashSet<>();*/
+    @OneToMany(mappedBy = "supplyBrand", fetch = FetchType.EAGER)
+    private Set<SupplyEntity> supplies = new HashSet<>();
 
 
 }

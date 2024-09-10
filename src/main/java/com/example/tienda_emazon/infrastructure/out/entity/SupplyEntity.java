@@ -23,14 +23,16 @@ public class SupplyEntity {
     private long amount;
     private long price;
 
-    /*@ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "brandId")
-    private BrandEntity brandEntity;*/
+    private BrandEntity supplyBrand;
 
-    //@ManyToMany(fetch = FetchType.EAGER)
-    /*@JoinTable(
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
             name = "supply_category",
             joinColumns = @JoinColumn(name = "supplyId"),
-            inverseJoinColumns = @JoinColumn(name = "categoryId"))*/
-    //private List<CategoryEntity> supplyCategories;
+            inverseJoinColumns = @JoinColumn(name = "categoryId"))
+    private List<CategoryEntity> supplyCategories;
+
+
 }

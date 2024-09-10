@@ -28,7 +28,7 @@ public class SupplyController {
     public ResponseEntity<CustomPage<SupplyModel>> getBrands(@RequestParam(defaultValue = "0") int page,
                                                              @RequestParam(defaultValue = "10") int size,
                                                              @RequestParam(defaultValue = "asc") String sortDirection,
-                                                             @RequestParam(defaultValue = "articleName") String sortBy){
+                                                             @RequestParam(defaultValue = "supplyName") String sortBy){
         return ResponseEntity.ok(supplyHandler.getSuppliesPaginated(new PageRequestDomain(page, size, sortDirection, sortBy)));
     }
 
