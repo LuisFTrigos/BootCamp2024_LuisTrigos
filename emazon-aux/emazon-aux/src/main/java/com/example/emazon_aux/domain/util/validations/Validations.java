@@ -2,6 +2,7 @@ package com.example.emazon_aux.domain.util.validations;
 
 import com.example.emazon_aux.domain.exception.DomainException;
 import com.example.emazon_aux.domain.model.UserModel;
+import com.example.emazon_aux.domain.util.constants.Constants;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,7 +23,7 @@ public class Validations {
 
     public String emptyStringValidate(String data){
         if (data.isEmpty()) {
-            throw new DomainException("The field can't be empty");
+            throw new DomainException(Constants.FIELD_CANOT_BE_EMPTY);
         }
         return data;
     }
@@ -32,7 +33,7 @@ public class Validations {
         Matcher mather = pattern.matcher(email);
 
         if (!mather.find()){
-            throw new DomainException("The mail format is invalid ");
+            throw new DomainException(Constants.MAIL_BAD_REQUEST);
         }
         return email;
     }
@@ -41,10 +42,10 @@ public class Validations {
         Pattern pattern = Pattern.compile(REGEX_PHONE);
         Matcher mather = pattern.matcher(phone);
         if(!mather.find()) {
-            throw new DomainException("The phone format is invalid");
+            throw new DomainException(Constants.INVALID_PHONE);
         }
         if(phone.length() > 13) {
-            throw new DomainException("The content of the phone must contain a maximum of 13 characters");
+            throw new DomainException(Constants.PHONE_NOT_BE_LONGER);
         }
         return phone;
     }

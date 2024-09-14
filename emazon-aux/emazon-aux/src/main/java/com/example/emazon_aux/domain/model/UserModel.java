@@ -2,6 +2,7 @@ package com.example.emazon_aux.domain.model;
 
 
 import com.example.emazon_aux.domain.util.validations.Validations;
+import com.example.emazon_aux.infrastructure.output.entity.RoleEnum;
 
 public class UserModel {
 
@@ -10,7 +11,7 @@ public class UserModel {
     private String lastName;
     private String password;
     private String email;
-    private RoleModel role;
+    private RoleEnum role;
     private int document;
     private String phone;
 
@@ -18,7 +19,7 @@ public class UserModel {
     }
 
     public UserModel(Long id, String name, String lastName, String password,
-                     String email, RoleModel role, int document, String phone) {
+                     String email, RoleEnum role, int document, String phone) {
         Validations valid = new Validations();
         this.id = id;
         this.name = name;
@@ -70,11 +71,11 @@ public class UserModel {
         this.email = email;
     }
 
-    public RoleModel getRole() {
+    public RoleEnum getRole() {
         return role;
     }
 
-    public void setRole(RoleModel role) {
+    public void setRole(RoleEnum role) {
         this.role = role;
     }
 
