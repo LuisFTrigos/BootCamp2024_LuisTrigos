@@ -6,6 +6,7 @@ import com.example.tienda_emazon.application.handler.ISupplyHandler;
 import com.example.tienda_emazon.domain.model.SupplyModel;
 import com.example.tienda_emazon.domain.model.page.CustomPage;
 import com.example.tienda_emazon.domain.model.page.PageRequestDomain;
+import com.example.tienda_emazon.infrastructure.out.entity.SupplyEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

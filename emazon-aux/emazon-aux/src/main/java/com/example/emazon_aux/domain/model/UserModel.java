@@ -1,8 +1,6 @@
 package com.example.emazon_aux.domain.model;
 
-
-import com.example.emazon_aux.domain.util.validations.Validations;
-import com.example.emazon_aux.infrastructure.output.entity.RoleEnum;
+import java.time.LocalDate;
 
 public class UserModel {
 
@@ -11,24 +9,25 @@ public class UserModel {
     private String lastName;
     private String password;
     private String email;
-    private RoleEnum role;
-    private int document;
+    private Long idRole;
+    private String document;
     private String phone;
+    private LocalDate birthday;
 
     public UserModel() {
     }
 
     public UserModel(Long id, String name, String lastName, String password,
-                     String email, RoleEnum role, int document, String phone) {
-        Validations valid = new Validations();
+                     String email, Long idRole, String document, String phone, LocalDate birthday) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.password = password;
         this.email = email;
-        this.role = role;
+        this.idRole = idRole;
         this.document = document;
         this.phone = phone;
+        this.birthday = birthday;
     }
 
     public Long getId() {
@@ -71,19 +70,19 @@ public class UserModel {
         this.email = email;
     }
 
-    public RoleEnum getRole() {
-        return role;
+    public Long getIdRole() {
+        return idRole;
     }
 
-    public void setRole(RoleEnum role) {
-        this.role = role;
+    public void setIdRole(Long idRole) {
+        this.idRole = idRole;
     }
 
-    public int getDocument() {
+    public String getDocument() {
         return document;
     }
 
-    public void setDocument(int document) {
+    public void setDocument(String document) {
         this.document = document;
     }
 
@@ -93,5 +92,13 @@ public class UserModel {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 }

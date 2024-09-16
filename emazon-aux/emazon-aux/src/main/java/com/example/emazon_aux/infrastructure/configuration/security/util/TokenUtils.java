@@ -1,4 +1,4 @@
-package com.example.emazon_aux.infrastructure.security.util;
+package com.example.emazon_aux.infrastructure.configuration.security.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

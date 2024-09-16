@@ -1,4 +1,4 @@
-package com.example.emazon_aux.infrastructure.security.service;
+package com.example.emazon_aux.infrastructure.configuration.security.service;
 
 import com.example.emazon_aux.infrastructure.output.entity.UserEntity;
 import lombok.RequiredArgsConstructor;

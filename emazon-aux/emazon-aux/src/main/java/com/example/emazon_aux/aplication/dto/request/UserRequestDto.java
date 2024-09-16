@@ -1,14 +1,16 @@
 package com.example.emazon_aux.aplication.dto.request;
 
 
-import com.example.emazon_aux.infrastructure.output.entity.RoleEntity;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -26,10 +28,12 @@ public class UserRequestDto {
 
     @NotNull(message = "The field document cannot null")
     @NotEmpty(message = "The field document cannot empty")
-    private int document;
+    @Max(value = 10, message = "The field document cannot be max 10 units")
+    private String document;
 
     @NotNull(message = "The field phone cannot null")
     @NotEmpty(message = "The field phone cannot empty")
+    @Max(value = 13, message = "The field phone cannot be max 10 units")
     private String phone;
 
     @Email(message = "The email format is invalid")
@@ -41,5 +45,11 @@ public class UserRequestDto {
     @NotEmpty(message = "The field password cannot empty")
     private String password;
 
-    private RoleEntity idRole;
+    @NotNull(message = "The field birthday cannot null")
+    @NotEmpty(message = "The field birthday cannot empty")
+    private LocalDate birthday;
+
+
+
+    private Long idRole;
 }

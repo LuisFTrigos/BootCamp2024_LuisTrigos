@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface IUserPersistencePort {
 
-    UserModel saveUser(UserModel userModel);
+    void saveUser(UserModel userModel);
 
     UserModel registerUser(UserModel userModel);
-
+    boolean existsByName(String name);
     List<UserModel> getAllUsers();
 }

@@ -1,24 +1,31 @@
 package com.example.emazon_aux.infrastructure.input;
 
 
-import com.example.emazon_aux.aplication.service.UserService;
+import com.example.emazon_aux.aplication.dto.request.UserRequestDto;
+import com.example.emazon_aux.aplication.dto.response.GenericResponse;
+import com.example.emazon_aux.aplication.handler.IUserHandler;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
-
 @RestController
-@RequestMapping("/User")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserRestController {
 
-    private final UserService userService;
+    private final IUserHandler userHandler;
 
-    @GetMapping("/Form")
-    public ResponseEntity<Map<String,String>> saveUser(){
-        return ResponseEntity.ok(userService.getForm());
+    @PostMapping("/create")
+    public ResponseEntity<GenericResponse> saveCategory(@RequestBody UserRequestDto userRequestDto){
+        GenericResponse genericResponse = userHandler.saveUser(userRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(genericResponse);
     }
+
+
+
+
 }

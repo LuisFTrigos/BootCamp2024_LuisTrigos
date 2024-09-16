@@ -19,9 +19,9 @@ import java.util.function.Function;
 public class JwtService {
     private static final String SECRET_KEY = "294A404E635266556A586E327235753878214125442A472D4B6150645367566B";
 
-    public String getToken(UserEntity user){
+    /*public String getToken(UserEntity user){
         return generateToken(new HashMap<>(),user);
-    }
+    }*/
 
     public String generateToken(
             Map<String, Object> extraClaims,

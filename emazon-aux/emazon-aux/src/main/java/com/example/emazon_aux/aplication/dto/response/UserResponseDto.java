@@ -21,8 +21,4 @@ public class UserResponseDto {
 
     private String email;
 
-    private String message;
-
-    private LocalDateTime date;
-
 }
