@@ -1,6 +1,7 @@
 package com.example.tienda_emazon.domain.util;
 
 import com.example.tienda_emazon.domain.exception.InvalidArgumentException;
+import com.example.tienda_emazon.domain.model.CategoryInfo;
 import com.example.tienda_emazon.domain.model.SupplyModel;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class FieldValidations {
     }
 
     public static void validateCategoryAssociated(SupplyModel supplyModel){
-        List<String> associatedCategories = supplyModel.getAssociatedCategories();
+        List<CategoryInfo> associatedCategories = supplyModel.getAssociatedCategories();
         if (associatedCategories == null || associatedCategories.isEmpty()){
             throw new InvalidArgumentException(INVALID_SUPPLY);
         }

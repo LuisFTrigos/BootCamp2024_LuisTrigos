@@ -25,7 +25,7 @@ public class SupplyController {
     }
 
     @GetMapping
-    public ResponseEntity<CustomPage<SupplyModel>> getBrands(@RequestParam(defaultValue = "0") int page,
+    public ResponseEntity<CustomPage<SupplyModel>> getSupply(@RequestParam(defaultValue = "0") int page,
                                                              @RequestParam(defaultValue = "10") int size,
                                                              @RequestParam(defaultValue = "asc") String sortDirection,
                                                              @RequestParam(defaultValue = "supplyName") String sortBy){

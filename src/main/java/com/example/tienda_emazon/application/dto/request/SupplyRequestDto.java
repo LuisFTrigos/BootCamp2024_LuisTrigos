@@ -1,5 +1,6 @@
 package com.example.tienda_emazon.application.dto.request;
 
+import com.example.tienda_emazon.domain.model.CategoryModel;
 import jakarta.validation.constraints.*;
 import lombok.*;
 

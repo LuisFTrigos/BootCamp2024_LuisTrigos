@@ -4,6 +4,7 @@ import com.example.tienda_emazon.domain.model.SupplyModel;
 import com.example.tienda_emazon.domain.model.page.CustomPage;
 import com.example.tienda_emazon.domain.model.page.PageRequestDomain;
 import com.example.tienda_emazon.domain.spi.ISupplyPersistencePort;
+import com.example.tienda_emazon.infrastructure.out.entity.CategoryEntity;
 import com.example.tienda_emazon.infrastructure.out.mapper.SupplyEntityMapper;
 import com.example.tienda_emazon.infrastructure.out.respository.JpaSupplyRepository;
 import com.example.tienda_emazon.infrastructure.out.entity.SupplyEntity;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -25,6 +27,7 @@ public class SupplyJpaAdapter implements ISupplyPersistencePort {
     @Override
     public SupplyModel saveSupply(SupplyModel supplyModel){
         SupplyEntity supplyEntity = supplyEntityMapper.modelToEntity(supplyModel);
+        System.out.println(supplyEntity.toString());
         supplyEntity = jpaSupplyRepository.save(supplyEntity);
         return supplyEntityMapper.entityToModel(supplyEntity);
     }

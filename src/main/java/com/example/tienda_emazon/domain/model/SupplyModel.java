@@ -7,15 +7,15 @@ public class SupplyModel {
     private long id;
     private String supplyName;
     private String supplyDescription;
-    private List<String> associatedCategories;
+    private List<CategoryInfo> associatedCategories;
     private long supplyAmount;
     private long supplyPrice;
 
-    public List<String> getAssociatedCategories() {
+    public List<CategoryInfo> getAssociatedCategories() {
         return associatedCategories;
     }
 
-    public void setAssociatedCategories(List<String> associatedCategories) {
+    public void setAssociatedCategories(List<CategoryInfo> associatedCategories) {
         this.associatedCategories = associatedCategories;
     }
 
