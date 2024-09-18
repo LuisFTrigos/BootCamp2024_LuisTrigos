@@ -21,6 +21,7 @@ public class Validations {
         emptyStringValidate(userModel.getName());
         emptyStringValidate(userModel.getLastName());
         emptyStringValidate(userModel.getEmail());
+        emptyStringValidate(userModel.getDocument());
         emailValidate(userModel.getEmail());
         validateAge(userModel.getBirthday());
         numberPhoneValidate(userModel.getPhone());
@@ -28,7 +29,7 @@ public class Validations {
 
     private static void emptyStringValidate(String data){
         if (data.isEmpty()) {
-            throw new UserAlreadyExistsException(Constants.FIELD_CANOT_BE_EMPTY);
+            throw new UserAlreadyExistsException(Constants.FIELD_CAN_T_BE_EMPTY);
         }
     }
 
@@ -59,4 +60,5 @@ public class Validations {
             throw new UserAlreadyExistsException(Constants.WRONG_AGE);
         }
     }
+
 }

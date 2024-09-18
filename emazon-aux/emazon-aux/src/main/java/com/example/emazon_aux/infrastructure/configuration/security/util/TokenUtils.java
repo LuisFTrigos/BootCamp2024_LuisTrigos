@@ -1,20 +1,30 @@
 package com.example.emazon_aux.infrastructure.configuration.security.util;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
+import com.example.emazon_aux.aplication.dto.response.JwtResponseDto;
+import com.nimbusds.jwt.JWT;
+import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.JWTParser;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.text.ParseException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+
+import static org.springframework.integration.config.xml.IntegrationNamespaceUtils.ROLE;
 
 public class TokenUtils {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TokenUtils.class);
     private static final String ACCESS_TOKEN_SECRET = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXvCJ9";
     private static final Long ACCESS_TOKEN_VALIDITY_SECONDS = 3600L;
 
@@ -74,5 +84,43 @@ public class TokenUtils {
         catch (JwtException e) {
             return null;
         }
+    }
+
+    public static boolean validateToken(String token) {
+        try {
+            Jwts.parserBuilder().setSigningKey(ACCESS_TOKEN_SECRET.getBytes()).build().parseClaimsJws(token);
+            return true;
+        } catch (MalformedJwtException e) {
+            LOGGER.error("Malformed token");
+        } catch (UnsupportedJwtException e) {
+            LOGGER.error("Unsupported token");
+        } catch (ExpiredJwtException e) {
+            LOGGER.error("Expired token");
+        } catch (IllegalArgumentException e) {
+            LOGGER.error("Empty token");
+        } catch (SignatureException e) {
+            LOGGER.error("Signature failure");
+        }
+        return false;
+    }
+
+    public static String refreshToken(JwtResponseDto jwtResponseDto) throws ParseException {
+        try {
+            Jwts.parserBuilder().setSigningKey(ACCESS_TOKEN_SECRET.getBytes()).build().parseClaimsJws(jwtResponseDto.getToken());
+        } catch (ExpiredJwtException e) {
+            JWT jwt = JWTParser.parse(jwtResponseDto.getToken());
+            JWTClaimsSet claims = jwt.getJWTClaimsSet();
+            String nombreUsuario = claims.getSubject();
+            List<String> roles = claims.getStringListClaim(ROLE);
+
+            return Jwts.builder()
+                    .setSubject(nombreUsuario)
+                    .claim(ROLE, roles)
+                    .setIssuedAt(new Date())
+                    .setExpiration(new Date(new Date().getTime() + ACCESS_TOKEN_VALIDITY_SECONDS))
+                    .signWith(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes()))
+                    .compact();
+        }
+        return null;
     }
 }

@@ -3,6 +3,7 @@ package com.example.emazon_aux.infrastructure.configuration.security.service;
 import com.example.emazon_aux.infrastructure.output.entity.UserEntity;
 import com.example.emazon_aux.infrastructure.output.respository.IUserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,6 +21,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .findOneByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("The user with email " + email + " doesn't exist."));
 
-        return new UserDetailsImpl(userEntity);
+        return User.builder()
+                .username(userEntity.getEmail())
+                .password(userEntity.getPassword())
+                .roles("AUX_BODEGA")
+                .build();
     }
+   // UserDetailsImpl(userEntity)
 }

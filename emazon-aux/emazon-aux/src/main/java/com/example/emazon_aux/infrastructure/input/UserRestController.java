@@ -24,8 +24,4 @@ public class UserRestController {
         GenericResponse genericResponse = userHandler.saveUser(userRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(genericResponse);
     }
-
-
-
-
 }

@@ -47,6 +47,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-integration'
 	implementation 'org.springframework.cloud:spring-cloud-starter'
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+	implementation 'com.nimbusds:nimbus-jose-jwt:9.30.2'
 
 
 	runtimeOnly 'com.mysql:mysql-connector-j'

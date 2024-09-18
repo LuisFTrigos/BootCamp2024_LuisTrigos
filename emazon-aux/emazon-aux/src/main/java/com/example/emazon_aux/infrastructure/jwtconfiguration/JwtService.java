@@ -1,6 +1,6 @@
 package com.example.emazon_aux.infrastructure.jwtconfiguration;
 
-import com.example.emazon_aux.infrastructure.output.entity.UserEntity;
+import com.example.emazon_aux.domain.util.constants.Constants;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -17,11 +17,6 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class JwtService {
-    private static final String SECRET_KEY = "294A404E635266556A586E327235753878214125442A472D4B6150645367566B";
-
-    /*public String getToken(UserEntity user){
-        return generateToken(new HashMap<>(),user);
-    }*/
 
     public String generateToken(
             Map<String, Object> extraClaims,
@@ -37,7 +32,7 @@ public class JwtService {
     }
 
     private Key getSignInKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        byte[] keyBytes = Decoders.BASE64.decode(Constants.SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 

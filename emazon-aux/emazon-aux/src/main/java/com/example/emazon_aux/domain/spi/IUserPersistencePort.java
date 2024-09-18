@@ -1,5 +1,6 @@
 package com.example.emazon_aux.domain.spi;
 
+import com.example.emazon_aux.domain.model.RoleModel;
 import com.example.emazon_aux.domain.model.UserModel;
 
 import java.util.List;
@@ -7,8 +8,13 @@ import java.util.List;
 public interface IUserPersistencePort {
 
     void saveUser(UserModel userModel);
-
-    UserModel registerUser(UserModel userModel);
+    void registerUser(UserModel userModel);
     boolean existsByName(String name);
-    List<UserModel> getAllUsers();
+    boolean existsByDocument(String document);
+    List<UserModel> getAllUsers(int page);
+    boolean userAlreadyExists(String documentNumber);
+    boolean mailAlreadyExists(String email);
+    RoleModel getRole();
+    String getPasswordEncrypt(String password);
+    //UserModel getUserById(Long id);
 }
