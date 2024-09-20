@@ -1,6 +1,7 @@
 package com.example.emazon_aux.infrastructure.configuration.security.util;
 
 import com.example.emazon_aux.aplication.dto.response.JwtResponseDto;
+import com.example.emazon_aux.infrastructure.configuration.security.service.UserDetailsImpl;
 import com.nimbusds.jwt.JWT;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.JWTParser;
@@ -45,6 +46,8 @@ public class TokenUtils {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Not found role for this user."))
                 .getAuthority();
+
+        Long id = ((UserDetailsImpl) userDetails).getUserId();
 
         //Set subject email in JWT
         Claims claims = Jwts.claims().setSubject(email);

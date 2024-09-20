@@ -26,4 +26,5 @@ public class BeanConfiguration {
     public UserPasswordEncrypt userPasswordEncrypt(){
         return new UserPasswordEncryptImpl(passwordEncoder);
     }
+
 }

@@ -8,6 +8,4 @@ import java.text.ParseException;
 
 public interface AuthHandler {
     JwtResponseDto login(LoginRegister loginRegister);
-    JwtResponseDto refresh(JwtResponseDto jwtResponseDto) throws ParseException;
-    void register(UserRequestDto userRegister);
 }

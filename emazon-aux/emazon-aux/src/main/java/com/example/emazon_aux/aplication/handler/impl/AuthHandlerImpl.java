@@ -27,8 +27,7 @@ public class AuthHandlerImpl implements AuthHandler {
     private final IUserServicePort userServicePort;
     private final IUserRequestMapper userRequestMapper;
 
-    public void User() { /**/
-    }
+
     @Override
     public JwtResponseDto login(LoginRegister loginRegister) {
         Authentication authentication = authenticationManager.authenticate(
@@ -40,14 +39,4 @@ public class AuthHandlerImpl implements AuthHandler {
         return new JwtResponseDto(jwt);
     }
 
-    @Override
-    public JwtResponseDto refresh(JwtResponseDto jwtResponseDto) throws ParseException {
-        String token = TokenUtils.refreshToken(jwtResponseDto);
-        return new JwtResponseDto(token);
-    }
-
-    @Override
-    public void register(UserRequestDto userRegister) {
-        userServicePort.registerUser(userRequestMapper.toUser(userRegister));
-    }
 }

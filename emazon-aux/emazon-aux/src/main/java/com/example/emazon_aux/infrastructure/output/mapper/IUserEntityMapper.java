@@ -17,6 +17,7 @@ public interface IUserEntityMapper {
     @Mapping(source = "document", target = "idDocument")
     UserEntity toUserEntity(UserModel userModel);
 
+
    // List<UserModel> toUserModelList(List<UserEntity> userEntityList);
 
 

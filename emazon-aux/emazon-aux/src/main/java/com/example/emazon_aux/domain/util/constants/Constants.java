@@ -12,8 +12,11 @@ public class Constants {
     public static final Long OWNER_ROLE_ID = 2L;
     public static final String OWNER_ROLE = "OWNER";
     public static final Long AUX_ROLE_ID = 3L;
+    public static final String AUX_ROLE = "AUX_BODEGA";
     public static final Long CUSTOMER_ROLE_ID = 4L;
     public static final String CUSTOMER_ROLE = "CUSTOMER";
+    public static final String RESPONSE_MESSAGE_KEY = "message";
+    public static final String USER_CREATED_MESSAGE = "User created successfully";
     public static final String PHONE_NOT_BE_LONGER = "The content of the phone must contain a maximum of 13 characters";
     public static final String WRONG_AGE = "The age can't be minus than 18 years";
     public static final String USER_ALREADY_EXIST = "Usuario ya existente: ";
