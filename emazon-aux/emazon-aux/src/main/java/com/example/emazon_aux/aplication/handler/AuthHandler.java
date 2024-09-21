@@ -1,11 +1,8 @@
 package com.example.emazon_aux.aplication.handler;
 
-import com.example.emazon_aux.aplication.dto.request.LoginRegister;
-import com.example.emazon_aux.aplication.dto.request.UserRequestDto;
 import com.example.emazon_aux.aplication.dto.response.JwtResponseDto;
-
-import java.text.ParseException;
+import com.example.emazon_aux.aplication.dto.request.AuthCredentials;
 
 public interface AuthHandler {
-    JwtResponseDto login(LoginRegister loginRegister);
+    JwtResponseDto login(AuthCredentials authCredentials);
 }

@@ -1,8 +1,10 @@
 package com.example.emazon_aux.infrastructure.configuration;
 
+import com.example.emazon_aux.domain.exception.NoDataFoundException;
 import com.example.emazon_aux.domain.exception.RoleNotFoundException;
 import com.example.emazon_aux.domain.exception.UserAlreadyExistsException;
 import com.example.emazon_aux.domain.exception.UserNotFoundException;
+import com.example.emazon_aux.domain.util.constants.Constants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -17,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import static com.example.emazon_aux.domain.util.constants.Constants.*;
 
 @ControllerAdvice
 public class ControllerAdvaisor {
@@ -33,7 +37,7 @@ public class ControllerAdvaisor {
         return new ResponseEntity<>(errorMessages, HttpStatus.BAD_REQUEST);
     }
 
-    /*@ExceptionHandler(AuthenticationException.class)
+    @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<Map<String, String>> handleAuthenticationException(AuthenticationException authException) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, WRONG_CREDENTIALS_MESSAGE));
@@ -44,24 +48,19 @@ public class ControllerAdvaisor {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, NO_DATA_FOUND_MESSAGE));
     }
-    @ExceptionHandler(MailAlreadyExistsException.class)
+    @ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity<Map<String, String>> handleMailAlreadyExistsException(
-            MailAlreadyExistsException mailAlreadyExistsException) {
+            UserAlreadyExistsException userAlreadyExistsException) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, MAIL_ALREADY_EXISTS_MESSAGE));
+                .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, userAlreadyExistsException.getMessage()));
     }
-    @ExceptionHandler(RoleNotAllowedForCreationException.class)
+   /* @ExceptionHandler(RoleNotAllowedForCreationException.class)
     public ResponseEntity<Map<String, String>> handleRoleNotAllowedForCreationException(
             RoleNotAllowedForCreationException roleNotAllowedForCreationException) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, ROLE_NOT_ALLOWED_MESSAGE));
-    }
-    @ExceptionHandler(UserAlreadyExistsException.class)
-    public ResponseEntity<Map<String, String>> handleUserAlreadyExistsException(
-            UserAlreadyExistsException userAlreadyExistsException) {
-        return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, USER_ALREADY_EXISTS_MESSAGE));
-    }
+    }*/
+
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<Map<String, String>> handleUserNotFoundException(
             UserNotFoundException userNotFoundException) {
@@ -74,17 +73,18 @@ public class ControllerAdvaisor {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, ROLE_NOT_FOUND_MESSAGE));
     }
-    @ExceptionHandler(ValidationModelException.class)
+    /*@ExceptionHandler(ValidationModelException.class)
     public ResponseEntity<Map<String, Map<String, String>>> handleValidationModelException(
             ValidationModelException domainException) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, domainException.getException()));
-    }
+    }*/
+
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Map<String, String>> httpMessageNotReadableException(
             HttpMessageNotReadableException httpMessageNotReadableException) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY,
                         httpMessageNotReadableException.getMessage()));
-    }*/
+    }
 }

@@ -13,6 +13,11 @@ public class Constants {
     public static final String OWNER_ROLE = "OWNER";
     public static final Long AUX_ROLE_ID = 3L;
     public static final String AUX_ROLE = "AUX_BODEGA";
+    public static final String RESPONSE_ERROR_MESSAGE_KEY = "error";
+    public static final String WRONG_CREDENTIALS_MESSAGE = "Wrong credentials";
+    public static final String NO_DATA_FOUND_MESSAGE = "No data found for the requested petition";
+    public static final String USER_NOT_FOUND_MESSAGE = "No user found with the role provided";
+    public static final String ROLE_NOT_FOUND_MESSAGE = "No role found with the id provided";
     public static final Long CUSTOMER_ROLE_ID = 4L;
     public static final String CUSTOMER_ROLE = "CUSTOMER";
     public static final String RESPONSE_MESSAGE_KEY = "message";

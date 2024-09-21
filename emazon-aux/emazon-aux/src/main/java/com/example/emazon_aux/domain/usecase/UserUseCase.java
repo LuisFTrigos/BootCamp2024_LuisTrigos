@@ -26,12 +26,6 @@ public class UserUseCase implements IUserServicePort {
     public void saveUser(UserModel userModel) {
         validationsUser(userModel);
         userModel.setPassword(userPasswordEncrypt.passwordEncoder(userModel.getPassword()));
-        userPersistencePort.saveUser(userModel);
-        RoleModel roleModel = userPersistencePort.getRole();
-        if (roleModel == null) {
-            throw new RoleNotFoundException();
-        }
-        userModel.setRoleModel(roleModel);
         if (userPersistencePort.existsByName(userModel.getName())) {
             throw new UserAlreadyExistsException(Constants.USER_ALREADY_EXIST + userModel.getName());
         }
@@ -41,6 +35,7 @@ public class UserUseCase implements IUserServicePort {
         if (userPersistencePort.mailAlreadyExists(userModel.getEmail())) {
             throw new UserAlreadyExistsException(Constants.MAIL_ALREADY_EXIST + userModel.getEmail());
         }
+        userPersistencePort.saveUser(userModel);
     }
 
     @Override
@@ -49,7 +44,7 @@ public class UserUseCase implements IUserServicePort {
         RoleModel roleModel = new RoleModel();
         roleModel.setId(Constants.CUSTOMER_ROLE_ID);
         userModel.setRoleModel(roleModel);
-        userModel.setPassword(userPersistencePort.getPasswordEncrypt(userModel.getPassword()));
+        userModel.setPassword(userPasswordEncrypt.passwordEncoder(userModel.getPassword()));
         userPersistencePort.registerUser(userModel);
     }
 

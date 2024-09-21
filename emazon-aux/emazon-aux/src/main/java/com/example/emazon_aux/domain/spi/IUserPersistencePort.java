@@ -15,6 +15,5 @@ public interface IUserPersistencePort {
     boolean userAlreadyExists(String documentNumber);
     boolean mailAlreadyExists(String email);
     RoleModel getRole();
-    String getPasswordEncrypt(String password);
     //UserModel getUserById(Long id);
 }

@@ -1,40 +1,46 @@
 package com.example.emazon_aux.infrastructure.configuration.security;
 
-import com.example.emazon_aux.infrastructure.configuration.ByCryptConfiguration;
-import lombok.AllArgsConstructor;
+import com.example.emazon_aux.infrastructure.jwt.JwtAuthorizationFilter;
+import com.example.emazon_aux.infrastructure.jwt.JwtEntryPoint;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableMethodSecurity
-@AllArgsConstructor
+@EnableMethodSecurity(securedEnabled = true)
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final UserDetailsService userDetailsService;
-    private final PasswordEncoder passwordEncoder;
+    private final JwtEntryPoint jwtEntryPoint;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-        .csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(request -> {
-        request.anyRequest().permitAll();
-        //request.requestMatchers("/users/create").hasRole("ADMIN");
-    })
-            .build();
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(request -> {
+                    request.requestMatchers("/auth/login", "/auth/register", "/swagger-ui.html",
+                            "/swagger-ui/**", "/v3/api-docs/**", "/actuator/health").permitAll();
+                    request.anyRequest().authenticated();
+                })
+                .exceptionHandling(handling -> handling.authenticationEntryPoint(jwtEntryPoint))
+                .addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
+    public JwtAuthorizationFilter jwtTokenFilter() {
+        return new JwtAuthorizationFilter();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 }

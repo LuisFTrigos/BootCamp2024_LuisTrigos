@@ -1,4 +1,4 @@
-package com.example.emazon_aux.infrastructure.jwtconfiguration;
+package com.example.emazon_aux.infrastructure.jwt;
 
 import com.example.emazon_aux.infrastructure.configuration.security.util.TokenUtils;
 import jakarta.servlet.FilterChain;

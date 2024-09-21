@@ -1,4 +1,4 @@
-package com.example.emazon_aux.infrastructure.configuration.security.dto;
+package com.example.emazon_aux.aplication.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

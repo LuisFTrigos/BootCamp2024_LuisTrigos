@@ -1,4 +1,4 @@
-package com.example.emazon_aux.infrastructure.jwtconfiguration;
+package com.example.emazon_aux.infrastructure.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

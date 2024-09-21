@@ -1,4 +1,4 @@
-package com.example.emazon_aux.infrastructure.jwtconfiguration;
+package com.example.emazon_aux.infrastructure.jwt;
 
 import com.example.emazon_aux.domain.util.constants.Constants;
 import io.jsonwebtoken.Claims;

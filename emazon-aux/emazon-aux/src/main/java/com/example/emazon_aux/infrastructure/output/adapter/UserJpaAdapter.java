@@ -13,22 +13,18 @@ import com.example.emazon_aux.infrastructure.output.respository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 import static com.example.emazon_aux.infrastructure.output.adapter.actions.RoleAuthentication.getRoleWithAuthentication;
 
-@Repository
 @RequiredArgsConstructor
 public class UserJpaAdapter implements IUserPersistencePort {
-
 
     private final IUserRepository userRepository;
     private final IRoleRepository roleRepository;
     private final IUserEntityMapper userEntityMapper;
     private final IRoleEntityMapper roleEntityMapper;
-    private final UserPasswordEncrypt passwordEncrypt;
 
     @Override
     public void saveUser(UserModel userModel) {
@@ -70,11 +66,6 @@ public class UserJpaAdapter implements IUserPersistencePort {
     @Override
     public RoleModel getRole() {
         return roleEntityMapper.toRoleModel(getRoleWithAuthentication(roleRepository));
-    }
-
-    @Override
-    public String getPasswordEncrypt(String password) {
-        return passwordEncrypt.passwordEncoder(password);
     }
 
     /*@Override
