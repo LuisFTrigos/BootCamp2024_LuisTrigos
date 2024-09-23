@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@Table(name = " categories")
+@Table(name = "categories")
 public class CategoryEntity {
 
     @Id

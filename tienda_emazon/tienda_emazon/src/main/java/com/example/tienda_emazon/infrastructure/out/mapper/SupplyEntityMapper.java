@@ -7,9 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring",
@@ -22,9 +20,9 @@ public interface SupplyEntityMapper {
     List<SupplyModel> entityListModelList(List<SupplyEntity> supplyEntityList);
 
     default List<String> mapCategories(List<CategoryEntity> categories) {
-        return Optional.ofNullable(categories)
-                .orElse(Collections.emptyList()).stream()
-                .map(CategoryEntity::getCategoryName).collect(Collectors.toList());
+        return categories.stream()
+                .map(CategoryEntity::getCategoryName)
+                .collect(Collectors.toList());
     }
 
 
