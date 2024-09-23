@@ -43,7 +43,7 @@ public class UserUseCase implements IUserServicePort {
         validationsUser(userModel);
         RoleModel roleModel = new RoleModel();
         roleModel.setId(Constants.CUSTOMER_ROLE_ID);
-        userModel.setRoleModel(roleModel);
+        //userModel.setRoleModel(roleModel);
         userModel.setPassword(userPasswordEncrypt.passwordEncoder(userModel.getPassword()));
         userPersistencePort.registerUser(userModel);
     }

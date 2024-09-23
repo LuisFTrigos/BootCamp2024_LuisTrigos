@@ -52,4 +52,7 @@ public class UserRequestDto {
 
 
     private Long idRole;
+
+    public UserRequestDto(String user, String user1, String number, String number1, LocalDate of, String mail, String password) {
+    }
 }

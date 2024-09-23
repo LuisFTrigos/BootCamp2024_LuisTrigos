@@ -13,7 +13,7 @@ public class UserModel {
     private String document;
     private String phone;
     private LocalDate birthday;
-    private RoleModel roleModel;
+    //private RoleModel roleModel;
 
     public UserModel() {
     }
@@ -29,7 +29,10 @@ public class UserModel {
         this.document = document;
         this.phone = phone;
         this.birthday = birthday;
-        this.roleModel = roleModel;
+        //this.roleModel = roleModel;
+    }
+
+    public UserModel(long l, String s, String s1, String s2, String s3, LocalDate of, String s4, String s5, RoleModel roleModel) {
     }
 
     public Long getId() {
@@ -104,11 +107,11 @@ public class UserModel {
         this.birthday = birthday;
     }
 
-    public RoleModel getRoleModel() {
+    /*public RoleModel getRoleModel() {
         return roleModel;
     }
 
     public void setRoleModel(RoleModel roleModel) {
         this.roleModel = roleModel;
-    }
+    }*/
 }
