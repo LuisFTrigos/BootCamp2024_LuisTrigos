@@ -16,12 +16,12 @@ public class UseCaseDataFactory {
         return  roleModel;
     }
 
-    public static RoleModel getRoleOwnerWithSetters() {
+    public static RoleModel getRoleAuxWithSetters() {
         RoleModel roleModel = new RoleModel();
 
         roleModel.setId(2L);
-        roleModel.setName("OWNER");
-        roleModel.setDescription("OWNER_ROLE");
+        roleModel.setName("AUX_BODEGA");
+        roleModel.setDescription("AUX_ROLE");
         return  roleModel;
     }
     public static RoleModel getRoleCustomerWithSetters() {
@@ -47,14 +47,14 @@ public class UseCaseDataFactory {
         return userModel;
     }
 
-    public static UserModel getUserOwnerWithSetters() {
+    public static UserModel getUserAuxWithSetters() {
         UserModel userModel = new UserModel();
         userModel.setId(1L);
-        userModel.setName("Owner");
-        userModel.setLastName("Owner");
+        userModel.setName("Aux_bodega");
+        userModel.setLastName("Aux_bodega");
         userModel.setDocument("1234567890");
         userModel.setPhone("+571234567890");
-        userModel.setEmail("owner@gmail.com");
+        userModel.setEmail("aux@gmail.com");
         userModel.setPassword("owner123");
         userModel.setBirthday(LocalDate.of(2000, 1, 1));
 
@@ -101,7 +101,6 @@ public class UseCaseDataFactory {
         userModel.setEmail("test2@gmail.com");
         userModel.setPassword("test123");
         userModel.setBirthday(LocalDate.of(2000, 1, 1));
-        userModel.setRoleModel(getRoleAdminWithSetters());
 
         return userModel;
     }

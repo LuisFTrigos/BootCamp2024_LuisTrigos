@@ -13,13 +13,12 @@ public class UserModel {
     private String document;
     private String phone;
     private LocalDate birthday;
-    //private RoleModel roleModel;
 
     public UserModel() {
     }
 
     public UserModel(Long id, String name, String lastName, String password,
-                     String email, Long idRole, String document, String phone, LocalDate birthday, RoleModel roleModel) {
+                     String email, Long idRole, String document, String phone, LocalDate birthday) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;

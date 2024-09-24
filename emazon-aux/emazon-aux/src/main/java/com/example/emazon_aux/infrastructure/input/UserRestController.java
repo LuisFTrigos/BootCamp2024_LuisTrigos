@@ -29,7 +29,7 @@ public class UserRestController {
 
     private final IUserHandler userHandler;
 
-    @Secured({Constants.ADMIN_ROLE })
+    @Secured({Constants.ADMIN_ROLE})
     @Operation(summary = "Add a new user",
             responses = {
                     @ApiResponse(responseCode = "201", description = "User created",

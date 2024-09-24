@@ -4,7 +4,6 @@ import com.example.emazon_aux.domain.exception.NoDataFoundException;
 import com.example.emazon_aux.domain.exception.RoleNotFoundException;
 import com.example.emazon_aux.domain.exception.UserAlreadyExistsException;
 import com.example.emazon_aux.domain.exception.UserNotFoundException;
-import com.example.emazon_aux.domain.util.constants.Constants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -23,7 +22,7 @@ import java.util.Map;
 import static com.example.emazon_aux.domain.util.constants.Constants.*;
 
 @ControllerAdvice
-public class ControllerAdvaisor {
+public class ControllerAdvisor {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Object> handleValidationException(MethodArgumentNotValidException ex) {
         List<String> errorMessages = new ArrayList<>();
